@@ -1,0 +1,12 @@
+# Safety net against accidental code commits
+*.ts
+*.tsx
+*.js
+*.jsx
+*.py
+*.sql
+*.env
+*.env.local
+node_modules/
+config/
+*.config.*
