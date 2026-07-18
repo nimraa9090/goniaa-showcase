@@ -16,9 +16,7 @@ The Goniaa ecosystem is composed of four primary pillars:
 
 ## Live Links
 <!-- TODO: Add your live deployment links below -->
-*   **Storefront:** [Link Placeholder]
-*   **Brand Manager Demo:** [Link Placeholder]
-*   **Mobile App Demo:** [Link Placeholder]
+*   **Storefront:** [https://goniaapk.vercel.app]
 
 ## Tech Stack
 | Layer | Technology |
