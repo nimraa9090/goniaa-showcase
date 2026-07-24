@@ -1,57 +1,149 @@
-# Goniaa Showcase
+<div align="center">
 
-## Pitch
-**Goniaa** is a comprehensive, AI-driven e-commerce ecosystem designed to bridge the gap between high-end retail and intelligent brand management. It combines a sleek, user-centric storefront with a powerful administrative suite and a cutting-edge AI Brand Manager to automate growth, optimize operations, and enhance customer engagement.
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0F172A,100:1E3A8A&height=140&section=header&text=Goniaa&fontSize=48&fontColor=ffffff&fontAlignY=55&desc=AI-Powered%20Fashion%20E-Commerce%20Ecosystem&descAlignY=80&descSize=16" width="100%"/>
 
-## Problem/Solution
-*   **The Problem:** Traditional e-commerce platforms often suffer from fragmented data, lack of intelligent insights, and poor session persistence, leading to operational inefficiencies and lost sales.
-*   **The Solution:** Goniaa provides a unified architecture where a dynamic storefront, a native mobile app, and an AI-powered manager work in tandem. By leveraging persistent state management, dynamic database integration, and AI-driven content scheduling, Goniaa ensures a seamless experience for both customers and brand owners.
+<p>
+  <img src="https://img.shields.io/badge/status-in%20production-2ea44f?style=flat-square" />
+  <img src="https://img.shields.io/badge/role-founder%20%26%20solo%20developer-0F172A?style=flat-square" />
+  <img src="https://img.shields.io/badge/next.js-15-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/typescript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/supabase-postgres-3ECF8E?style=flat-square&logo=supabase&logoColor=white" />
+  <img src="https://img.shields.io/badge/expo-SDK%2054-000020?style=flat-square&logo=expo&logoColor=white" />
+</p>
+
+<p>
+  <a href="https://goniaa.pk"><img src="https://img.shields.io/badge/🌐_Live_Website-Visit-1E3A8A?style=for-the-badge" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/📱_Mobile_APK-Download-1E3A8A?style=for-the-badge" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/🎥_Video_Demo-Watch-1E3A8A?style=for-the-badge" /></a>
+  <a href="https://github.com/nimraa9090"><img src="https://img.shields.io/badge/💻_GitHub-Profile-1E3A8A?style=for-the-badge" /></a>
+</p>
+
+</div>
+
+---
+
+## Overview
+
+**Goniaa** is a fashion e-commerce ecosystem I designed, built, and operate as founder and solo developer — a public storefront, an AI-powered internal Brand Manager dashboard, and a native mobile app, all shipped to production.
+
+This is not a tutorial project or a clone: it's a real, live business with real customers, real inventory, and real operational decisions running through software I built end to end — product, design, frontend, backend, mobile, and AI integration.
+
+> **Note:** This is a public showcase repository documenting the architecture, engineering decisions, and outcomes of the Goniaa platform. Production source code remains in a private repository.
+
+---
 
 ## System Overview
-The Goniaa ecosystem is composed of four primary pillars:
-1.  **Consumer Storefront:** A high-performance web interface for browsing and purchasing.
-2.  **Native Mobile Application:** An Expo-powered app featuring advanced capabilities like Virtual Try-on.
-3.  **Administrative Dashboard:** A robust command center for managing products, categories, and orders.
-4.  **AI Brand Manager:** An intelligent dashboard that handles AI-driven content creation, WhatsApp automation, and predictive analytics.
 
-## Live Links
-<!-- TODO: Add your live deployment links below -->
-*   **Storefront:** [https://goniaapk.vercel.app]
+Goniaa is composed of three applications sharing a single Supabase backend:
+
+| Component | Description | Stack |
+|---|---|---|
+| **Storefront** | Public-facing store where customers browse and purchase | Next.js 15, TypeScript, Vercel |
+| **Brand Manager Dashboard** | Internal 11-tab operations console — analytics, inventory, content, and AI-assisted decisions | Next.js 15, TypeScript, Groq API |
+| **Mobile App** | Companion mobile experience | React Native, Expo SDK 54 |
+| **Backend** | Shared data layer: auth, database, storage | Supabase (Postgres) |
+| **AI Layer** | LLM-powered insights and content assistance inside the dashboard | Groq API — Llama 3.3 70B Versatile |
+
+```
+                         ┌─────────────────────┐
+                         │      Supabase        │
+                         │  (Postgres · Auth ·   │
+                         │      Storage)         │
+                         └───────────┬───────────┘
+                 ┌───────────────────┼───────────────────┐
+                 │                   │                   │
+        ┌────────▼────────┐ ┌────────▼────────┐ ┌────────▼────────┐
+        │    Storefront     │ │  Brand Manager   │ │   Mobile App     │
+        │   (Next.js 15)     │ │  Dashboard (11    │ │ (React Native +  │
+        │                    │ │  tabs, Groq LLM)  │ │   Expo SDK 54)   │
+        └────────────────────┘ └────────────────────┘ └────────────────┘
+```
+
+---
+
+## Engineering Highlights
+
+Real problems solved while building and operating Goniaa in production:
+
+- **Built an 11-tab AI dashboard from scratch** — analytics, inventory, content, and operations tooling, integrated with the Groq API for AI-assisted brand decisions.
+- **Diagnosed and eliminated a production-blocking React error (`recharts` #130)** by replacing the third-party charting library with custom, dependency-free CSS charts — removing an entire class of runtime crashes.
+- **Root-caused a recurring `CSSStyleDeclaration` crash** traced to JSX spread operators inside style props, and resolved it by refactoring to reusable, strongly-typed styled components across the dashboard.
+- **Fixed a Supabase auth misconfiguration** and replaced deprecated dependencies that were silently breaking builds.
+- **Debugged NativeWind styling inconsistencies** across iOS/Android in the React Native mobile app.
+- **Ran a brand-consistency audit** on the live storefront, catching a luxury-vs-affordable positioning contradiction and inconsistent brand naming before they reached more customers.
+
+---
 
 ## Tech Stack
-| Layer | Technology |
-| :--- | :--- |
-| **Frontend (Web)** | Next.js, TailwindCSS, Zustand (Persisted) |
-| **Mobile App** | Expo (React Native), NativeWind, Drizzle ORM |
-| **Backend/Database** | Supabase (PostgreSQL), Auth, Storage |
-| **AI Engine** | Google Gemini AI |
-| **Infrastructure** | Vercel, GitHub Actions |
 
-## Feature Breakdown
+**Frontend:** Next.js 15 · TypeScript · React · TailwindCSS
+**Mobile:** React Native · Expo SDK 54 · NativeWind
+**Backend:** Supabase (Postgres, Auth, Storage)
+**AI:** Groq API (Llama 3.3 70B Versatile)
+**Infra:** Vercel · GitHub Actions
 
-### 🛍️ Storefront & Mobile App
-*   **Dynamic Product Catalog:** Real-time synchronization with the admin database.
-*   **Virtual Try-on:** (Mobile Exclusive) AI-powered visual testing for products.
-*   **Seamless Checkout:** Optimized flow with order tracking and confirmation.
-*   **Persistent Cart:** User sessions remain intact across refreshes and devices.
+---
 
-### ⚙️ Administrative Suite
-*   **Inventory Management:** Dynamic category creation and product mapping.
-*   **Order Fulfillment:** Real-time status updates with optimistic UI feedback.
-*   **Reliability Engineering:** Automated data cleaning to prevent database constraint violations.
+## Folder Structure
 
-### 🤖 AI Brand Manager
-*   **Content Calendar:** Automated post scheduling for TikTok, Instagram, and Facebook.
-*   **WhatsApp Automation:** Intelligent inbound/outbound message handling with quick-reply templates.
-*   **AI Analytics:** Predictive scoring for content performance (Algo-Score).
+```
+goniaa-ecosystem/
+├── apps/
+│   ├── storefront/            # Next.js 15 public storefront
+│   │   ├── app/                # App Router routes
+│   │   ├── components/         # UI components
+│   │   ├── lib/                 # Supabase client, utils
+│   │   └── public/
+│   ├── dashboard/              # Brand Manager (11-tab admin console)
+│   │   ├── app/
+│   │   │   ├── (tabs)/          # analytics, inventory, content, etc.
+│   │   │   └── api/             # Route handlers, Groq integration
+│   │   ├── components/
+│   │   ├── lib/
+│   │   │   ├── ai/               # Groq client + prompt logic
+│   │   │   └── supabase/
+│   │   └── types/
+│   └── mobile/                  # React Native + Expo app
+│       ├── app/                  # Expo Router
+│       ├── components/
+│       └── lib/
+├── packages/
+│   ├── ui/                       # Shared design system components
+│   ├── config/                   # Shared TS/ESLint/Tailwind config
+│   └── types/                    # Shared TypeScript types
+├── supabase/
+│   ├── migrations/
+│   └── seed/
+├── docs/
+│   ├── architecture.md
+│   └── decisions/                # Lightweight ADRs
+└── README.md
+```
 
-## Technical Highlights
-*   **Persistence Layer:** Refactored state management using Zustand middleware to ensure zero session loss on page reloads.
-*   **Dynamic Integration:** Replaced hardcoded logic with a fully dynamic database-to-UI pipeline for category management.
-*   **Optimistic UI:** Implemented immediate local state updates for administrative actions to provide a "zero-latency" feel.
-*   **Asset Pipeline:** Standardized image service for robust handling of product assets and storage bucket routing.
+---
 
-## Note about Private Source Code
-The source code for this project is hosted in private repositories. This repository serves as a portfolio showcase featuring documentation, architecture overviews, and visual demonstrations.
+## Screenshots
 
-<!-- TODO: Add a GIF or screenshot of the overall system here -->
+> _Add 3–5 real screenshots or a short GIF of the storefront, the dashboard, and the mobile app here — this section converts recruiters faster than any text._
+
+| Storefront | Brand Manager Dashboard | Mobile App |
+|---|---|---|
+| _screenshot_ | _screenshot_ | _screenshot_ |
+
+---
+
+## Roadmap
+
+- [ ] Public mobile app release (App Store / Play Store)
+- [ ] Expand AI Brand Manager with automated inventory forecasting
+- [ ] Add role-based access for a small internal team
+- [ ] Performance pass on storefront Core Web Vitals
+
+---
+
+## Author
+
+**Nimra** — Founder & Solo Developer, Goniaa
+BS Artificial Intelligence, Hazara University (Expected 2027)
+
+[Portfolio](https://goniaa.pk) · [GitHub](https://github.com/nimraa9090) · [LinkedIn](#)
